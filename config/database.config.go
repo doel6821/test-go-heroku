@@ -30,7 +30,7 @@ func SetupDatabaseConnection() *gorm.DB {
 	}
 
 	db.AutoMigrate(&entity.User{}, &entity.Product{})
-	println("Database connected!")
+	println("Database connected !")
 	return db
 }
 
@@ -38,7 +38,7 @@ func SetupDatabaseConnection() *gorm.DB {
 func CloseDatabaseConnection(db *gorm.DB) {
 	dbSQL, err := db.DB()
 	if err != nil {
-		panic("Failed to close connection from database")
+		panic("Failed to close connection from database ")
 	}
 	dbSQL.Close()
 }
