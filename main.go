@@ -1,7 +1,12 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/ydhnwb/golang_heroku/docs"
 	"github.com/ydhnwb/golang_heroku/config"
 	v1 "github.com/ydhnwb/golang_heroku/handler/v1"
 	"github.com/ydhnwb/golang_heroku/middleware"
@@ -23,9 +28,30 @@ var (
 	productHandler v1.ProductHandler      = v1.NewProductHandler(productService, jwtService)
 )
 
+type swaggerInfo struct {
+	Version     string
+	Host        string
+	BasePath    string
+	Schemes     []string
+	Title       string
+	Description string
+}
+
 func main() {
 	defer config.CloseDatabaseConnection(db)
 	server := gin.Default()
+
+	server.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	docs.SwaggerInfo.Title = "Test Synergy"
+	docs.SwaggerInfo.Description = "Simple Login and Register"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+	switch os.Getenv("APPS_ENV") {
+	case "local":
+		docs.SwaggerInfo.Host = "localhost:8080"
+	case "dev":
+		docs.SwaggerInfo.Host = "https://test-synergy.herokuapp.com"
+	}
 
 	authRoutes := server.Group("api/auth")
 	{

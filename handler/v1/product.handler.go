@@ -33,6 +33,16 @@ func NewProductHandler(productService service.ProductService, jwtService service
 	}
 }
 
+
+// @Summary Get All Product
+// @Description Get All Product
+// @ID Get All Product
+// @Param Authorization header string true "Token"
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} response.Response
+// @Failure 400 {object} response.Response
+// @Router /api/product [get]
 func (c *productHandler) All(ctx *gin.Context) {
 	authHeader := ctx.GetHeader("Authorization")
 	token := c.jwtService.ValidateToken(authHeader, ctx)
@@ -50,6 +60,16 @@ func (c *productHandler) All(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// @Summary Create Product
+// @Description Create Product
+// @ID Create Product
+// @Param Authorization header string true "Token"
+// @Param body body dto.CreateProductRequest true "request body"
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} response.Response
+// @Failure 400 {object} response.Response
+// @Router /api/product [post]
 func (c *productHandler) CreateProduct(ctx *gin.Context) {
 	var createProductReq dto.CreateProductRequest
 	err := ctx.ShouldBind(&createProductReq)
@@ -77,6 +97,16 @@ func (c *productHandler) CreateProduct(ctx *gin.Context) {
 
 }
 
+// @Summary Find Product By ID
+// @Description Find Product By ID
+// @ID Find Product By ID
+// @Param Authorization header string true "Token"
+// @Param id query string false "name search by id"
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} response.Response
+// @Failure 400 {object} response.Response
+// @Router /api/product/:id [get]
 func (c *productHandler) FindOneProductByID(ctx *gin.Context) {
 	id := ctx.Param("id")
 
@@ -91,6 +121,16 @@ func (c *productHandler) FindOneProductByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// @Summary Find Product By ID
+// @Description Find Product By ID
+// @ID Find Product By ID
+// @Param Authorization header string true "Token"
+// @Param id query string false "name search by id"
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} response.Response
+// @Failure 400 {object} response.Response
+// @Router /api/product/:id [delete]
 func (c *productHandler) DeleteProduct(ctx *gin.Context) {
 	id := ctx.Param("id")
 
@@ -109,6 +149,17 @@ func (c *productHandler) DeleteProduct(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, response)
 }
 
+// @Summary Find Product By ID
+// @Description Find Product By ID
+// @ID Find Product By ID
+// @Param Authorization header string true "Token"
+// @Param id query string false "name search by id"
+// @Param body body dto.UpdateProductRequest true "request body"
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} response.Response
+// @Failure 400 {object} response.Response
+// @Router /api/product/:id [put]
 func (c *productHandler) UpdateProduct(ctx *gin.Context) {
 	updateProductRequest := dto.UpdateProductRequest{}
 	err := ctx.ShouldBind(&updateProductRequest)
