@@ -72,7 +72,7 @@ func main() {
 
 	productRoutes := server.Group("api/product", middleware.AuthorizeJWT(jwtService))
 	{
-		productRoutes.GET("/", productHandler.All)
+		productRoutes.GET("/all", productHandler.All)
 		productRoutes.POST("/", productHandler.CreateProduct)
 		productRoutes.GET("/:id", productHandler.FindOneProductByID)
 		productRoutes.PUT("/:id", productHandler.UpdateProduct)

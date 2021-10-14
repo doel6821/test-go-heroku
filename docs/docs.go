@@ -100,40 +100,6 @@ var doc = `{
             }
         },
         "/api/product": {
-            "get": {
-                "description": "Get All Product",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "summary": "Get All Product",
-                "operationId": "Get All Product",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Token",
-                        "name": "Authorization",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/response.Response"
-                        }
-                    }
-                }
-            },
             "post": {
                 "description": "Create Product",
                 "consumes": [
@@ -178,7 +144,43 @@ var doc = `{
                 }
             }
         },
-        "/api/product/:id": {
+        "/api/product/all": {
+            "get": {
+                "description": "Get All Product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get All Product",
+                "operationId": "Get All Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/product/{id}": {
             "get": {
                 "description": "Find Product By ID",
                 "consumes": [
@@ -199,9 +201,10 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "name search by id",
+                        "description": "ID of the product to be find",
                         "name": "id",
-                        "in": "query"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -220,15 +223,15 @@ var doc = `{
                 }
             },
             "put": {
-                "description": "Find Product By ID",
+                "description": "Update Product By ID",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Find Product By ID",
-                "operationId": "Find Product By ID",
+                "summary": "Update Product By ID",
+                "operationId": "Update Product By ID",
                 "parameters": [
                     {
                         "type": "string",
@@ -239,9 +242,10 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "name search by id",
+                        "description": "ID of the product to be updated",
                         "name": "id",
-                        "in": "query"
+                        "in": "path",
+                        "required": true
                     },
                     {
                         "description": "request body",
@@ -269,15 +273,15 @@ var doc = `{
                 }
             },
             "delete": {
-                "description": "Find Product By ID",
+                "description": "Delete Product By ID",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "Find Product By ID",
-                "operationId": "Find Product By ID",
+                "summary": "Delete Product By ID",
+                "operationId": "Delete Product By ID",
                 "parameters": [
                     {
                         "type": "string",
@@ -288,9 +292,10 @@ var doc = `{
                     },
                     {
                         "type": "string",
-                        "description": "name search by id",
+                        "description": "ID of the product to be delete",
                         "name": "id",
-                        "in": "query"
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {

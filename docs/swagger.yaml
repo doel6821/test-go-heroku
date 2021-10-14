@@ -107,29 +107,6 @@ paths:
             $ref: '#/definitions/response.Response'
       summary: Register
   /api/product:
-    get:
-      consumes:
-      - application/json
-      description: Get All Product
-      operationId: Get All Product
-      parameters:
-      - description: Token
-        in: header
-        name: Authorization
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/response.Response'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/response.Response'
-      summary: Get All Product
     post:
       consumes:
       - application/json
@@ -159,21 +136,22 @@ paths:
           schema:
             $ref: '#/definitions/response.Response'
       summary: Create Product
-  /api/product/:id:
+  /api/product/{id}:
     delete:
       consumes:
       - application/json
-      description: Find Product By ID
-      operationId: Find Product By ID
+      description: Delete Product By ID
+      operationId: Delete Product By ID
       parameters:
       - description: Token
         in: header
         name: Authorization
         required: true
         type: string
-      - description: name search by id
-        in: query
+      - description: ID of the product to be delete
+        in: path
         name: id
+        required: true
         type: string
       produces:
       - application/json
@@ -186,7 +164,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.Response'
-      summary: Find Product By ID
+      summary: Delete Product By ID
     get:
       consumes:
       - application/json
@@ -198,9 +176,10 @@ paths:
         name: Authorization
         required: true
         type: string
-      - description: name search by id
-        in: query
+      - description: ID of the product to be find
+        in: path
         name: id
+        required: true
         type: string
       produces:
       - application/json
@@ -217,17 +196,18 @@ paths:
     put:
       consumes:
       - application/json
-      description: Find Product By ID
-      operationId: Find Product By ID
+      description: Update Product By ID
+      operationId: Update Product By ID
       parameters:
       - description: Token
         in: header
         name: Authorization
         required: true
         type: string
-      - description: name search by id
-        in: query
+      - description: ID of the product to be updated
+        in: path
         name: id
+        required: true
         type: string
       - description: request body
         in: body
@@ -246,5 +226,29 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.Response'
-      summary: Find Product By ID
+      summary: Update Product By ID
+  /api/product/all:
+    get:
+      consumes:
+      - application/json
+      description: Get All Product
+      operationId: Get All Product
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get All Product
 swagger: "2.0"

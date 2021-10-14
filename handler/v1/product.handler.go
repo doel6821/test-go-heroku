@@ -42,7 +42,7 @@ func NewProductHandler(productService service.ProductService, jwtService service
 // @Produce  json
 // @Success 200 {object} response.Response
 // @Failure 400 {object} response.Response
-// @Router /api/product [get]
+// @Router /api/product/all [get]
 func (c *productHandler) All(ctx *gin.Context) {
 	authHeader := ctx.GetHeader("Authorization")
 	token := c.jwtService.ValidateToken(authHeader, ctx)
