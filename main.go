@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -42,15 +43,18 @@ func main() {
 	defer config.CloseDatabaseConnection(db)
 	server := gin.Default()
 	server.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"https://test-synergy.herokuapp.com/","localhost:8080"},
 		AllowMethods:     []string{"GET", "POST", "OPTIONS", "DELETE", "PUT"},
 		AllowHeaders:     []string{"Origin", "authorization", "Content-Length", "Content-Type", "User-Agent", "Referrer", "Host", "Token"},
 		ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
 		AllowCredentials: true,
+		// AllowOriginFunc: func(origin string) bool {
+		//   return origin == "https://github.com"
+		// },
+		MaxAge: 12 * time.Hour,
 		AllowAllOrigins:  true,
 		//AllowOriginFunc:  func(origin string) bool { return true },
-		MaxAge: 86400,
-	}))
-
+	  }))
 	server.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	docs.SwaggerInfo.Title = "Test Synergy"
 	docs.SwaggerInfo.Description = "Simple Login and Register"
