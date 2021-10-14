@@ -55,7 +55,7 @@ func main() {
 	case "local":
 		docs.SwaggerInfo.Host = "localhost:8080"
 	case "dev":
-		docs.SwaggerInfo.Host = "https://test-synergy.herokuapp.com"
+		docs.SwaggerInfo.Host = "test-synergy.herokuapp.com"
 	}
 
 	authRoutes := server.Group("api/auth")
