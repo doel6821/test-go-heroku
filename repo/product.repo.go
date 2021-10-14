@@ -1,6 +1,8 @@
 package repo
 
 import (
+	"strconv"
+
 	"github.com/ydhnwb/golang_heroku/entity"
 	"gorm.io/gorm"
 )
@@ -44,7 +46,8 @@ func (c *productRepo) UpdateProduct(product entity.Product) (entity.Product, err
 
 func (c *productRepo) FindOneProductByID(productID string) (entity.Product, error) {
 	var product entity.Product
-	res := c.connection.Preload("User").Where("id = ?", productID).Take(&product)
+	id, _ := strconv.Atoi(productID)
+	res := c.connection.Preload("User").Where("id = ?", id).Take(&product)
 	if res.Error != nil {
 		return product, res.Error
 	}
@@ -53,13 +56,15 @@ func (c *productRepo) FindOneProductByID(productID string) (entity.Product, erro
 
 func (c *productRepo) FindAllProduct(userID string) ([]entity.Product, error) {
 	products := []entity.Product{}
-	c.connection.Where("user_id = ?", userID).Find(&products)
+	id, _ := strconv.Atoi(userID)
+	c.connection.Where("user_id = ?", id).Find(&products)
 	return products, nil
 }
 
 func (c *productRepo) DeleteProduct(productID string) error {
 	var product entity.Product
-	res := c.connection.Preload("User").Where("id = ?", productID).Take(&product)
+	id, _ := strconv.Atoi(productID)
+	res := c.connection.Preload("User").Where("id = ?", id).Take(&product)
 	if res.Error != nil {
 		return res.Error
 	}

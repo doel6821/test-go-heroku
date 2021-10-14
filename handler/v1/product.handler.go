@@ -101,7 +101,7 @@ func (c *productHandler) CreateProduct(ctx *gin.Context) {
 // @Description Find Product By ID
 // @ID Find Product By ID
 // @Param Authorization header string true "Token"
-// @Param id query integer false "name search by id"
+// @Param id query string false "name search by id"
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} response.Response
@@ -125,7 +125,7 @@ func (c *productHandler) FindOneProductByID(ctx *gin.Context) {
 // @Description Find Product By ID
 // @ID Find Product By ID
 // @Param Authorization header string true "Token"
-// @Param id query integer false "name search by id"
+// @Param id query string false "name search by id"
 // @Accept  json
 // @Produce  json
 // @Success 200 {object} response.Response
@@ -153,7 +153,7 @@ func (c *productHandler) DeleteProduct(ctx *gin.Context) {
 // @Description Find Product By ID
 // @ID Find Product By ID
 // @Param Authorization header string true "Token"
-// @Param id query integer false "name search by id"
+// @Param id query string false "name search by id"
 // @Param body body dto.UpdateProductRequest true "request body"
 // @Accept  json
 // @Produce  json
