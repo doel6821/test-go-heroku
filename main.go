@@ -30,20 +30,11 @@ var (
 	productHandler v1.ProductHandler      = v1.NewProductHandler(productService, jwtService)
 )
 
-type swaggerInfo struct {
-	Version     string
-	Host        string
-	BasePath    string
-	Schemes     []string
-	Title       string
-	Description string
-}
-
 func main() {
 	defer config.CloseDatabaseConnection(db)
 	server := gin.Default()
 	server.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"https://test-synergy.herokuapp.com/","localhost:8080"},
+		AllowOrigins:     []string{"*","https://test-synergy.herokuapp.com/","localhost:8080"},
 		AllowMethods:     []string{"GET", "POST", "OPTIONS", "DELETE", "PUT"},
 		AllowHeaders:     []string{"Origin", "authorization", "Content-Length", "Content-Type", "User-Agent", "Referrer", "Host", "Token"},
 		ExposeHeaders:    []string{"Content-Length", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers", "Content-Type"},
@@ -52,7 +43,7 @@ func main() {
 		//   return origin == "https://github.com"
 		// },
 		MaxAge: 12 * time.Hour,
-		AllowAllOrigins:  true,
+		// AllowAllOrigins:  true,
 		//AllowOriginFunc:  func(origin string) bool { return true },
 	  }))
 	server.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
